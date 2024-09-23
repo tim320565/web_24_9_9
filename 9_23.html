@@ -26,6 +26,16 @@
 				5.hsl(色相,彩度,亮度)
 				6.hsla(0~360,0~100%,0~100%,0~1)
 			*/
+			/*  前景:文字顏色(color)
+				背景(background):
+					顏色(background-color)
+					圖案(background-image)
+			*/
+			/* 漸層 not a color,is a image
+			1.線性漸層 linear-gradient()
+
+			
+			*/
 			p {
 				margin: 0;
 			}
@@ -34,16 +44,16 @@
 				margin-bottom: 20px;
 			}
 			span {
-				background-color: color;
+				background-color: gray;
 			}
 			#sp1 {
-				background-color: color;
+				background-color: green;
 				[x]width: 200px;
 				[x]height: 100px;
 				display: inline
 			}
 			#sp2 {
-				background-color: color;
+				background-color: blue;
 				width: 200px;
 				height: 100px;
 				display: inline-block;
@@ -52,17 +62,24 @@
 				display: block
 				width: 200px;
 				height: 100px;
+			}
 			.cs1{
-				background-color: color;
+				background-color: yellow;
 			}
 			.cs2{
-				color: color;
+				color: red;
 			}
-			
+			#d1 {
+				background: linear-gradient(right,red,blue,yellow);
+			}
+			#d2 {
+				background-image: linear-gradient(90deg,red,orange,yellow,green,blue);
+			}
 		</style>
 	<head>
 	<body>
-		<p>段落</p>
+		<p id="d1">段落</p>
+		<p id="d2">段落</p>
 		<div class="cs1">區塊元素</div>
 		<span id="sp1">行內元素</span>
 		<span id="sp2" class="cs2">行內區塊元素</span>

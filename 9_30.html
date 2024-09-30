@@ -1,0 +1,125 @@
+<html>
+    <head>
+        <title>漸層動畫</title>
+        <meta charset="UTF-8">
+        <style>
+            div {
+                width: 500px;
+                height: 600px;
+            }
+            #d1{
+                background: linear-gradient(90deg,red,white,blue);
+            }
+            #d2{
+                background: linear-gradient(90deg,red,white 15%,blue 65%,yellow);
+            }
+            #d3{
+                background: repeating-linear-gradient(45deg,red 10%,white 25%,red 30%);
+            }
+            #d4{
+                background: radial-gradient(circle,black 20%,white,blue 60%);/*+cirle一定是圓形*/
+                height: 500px;
+            }
+            #d5{
+                background: repeating-radial-gradient(yellow 30%,green 60%,orange)
+            }
+            #d6{
+                background: conic-gradient(red,orange,yellow,red);
+                height: 500px;
+            }
+            #d7{
+                background: repeating-conic-gradient(blue 20%,yellow 40%,blue 60%);
+                height: 500px;
+            }
+            /*動畫*/
+            @keyframes k1{
+                0%{background: linear-gradient(90deg,red,white 50%,blue);}
+                20%{background: linear-gradient(90deg,red,white 30%,blue);}
+                40%{background: linear-gradient(90deg,red,white 10%,blue);}
+                60%{background: linear-gradient(90deg,red,white 10%,blue);}
+                80%{background: linear-gradient(90deg,red,white 30%,blue);}
+                100%{background: linear-gradient(90deg,red,white 50%,blue);}
+            }
+            #a1{
+                animation: k1 1s infinite linear;
+            }
+            @keyframes k2{
+                0%{background: linear-gradient(0deg,red,white);}
+                20%{background: linear-gradient(90deg,red,white);}
+                40%{background: linear-gradient(135deg,red,white);}
+                60%{background: linear-gradient(180deg,red,white);}
+                80%{background: linear-gradient(270deg,red,white);}
+                100%{background: linear-gradient(360deg,red,white);}
+            }
+            #a2{
+                animation: k2 1s infinite linear;
+            }
+            @keyframes k3{
+                0%{background: linear-gradient(45deg,red 10%,white 25%,red 30%);}
+                50%{background: linear-gradient(45deg,white 10%,red 25%,white 30%);}
+                100%{background: linear-gradient(45deg,red 10%,white 25%,red 30%);}
+            #a3{
+                animation: k3 500mss infinite linear;
+            }
+            #a4{
+                background: radial-gradient(circle,black 20%,white,blue 60%);/*+cirle一定是圓形*/
+            }
+            @keyframes k4{
+                0%{background: repeating-radial-gradient(yellow 30%,green 60%,orange)}
+                50%{background: repeating-radial-gradient(yellow 30%,green 60%,orange)}
+                100%{background: repeating-radial-gradient(yellow 30%,green 60%,orange)}
+            }
+            #a5{
+                background: repeating-radial-gradient(yellow 30%,green 60%,orange)
+            }
+            @keyframes k6{
+
+            }
+            #a6{
+                animation: ;
+            }
+            @keyframes k7{
+
+            }
+            #a7{
+                background: repeating-conic-gradient(blue 20%,yellow 40%,blue 60%)
+            }
+            @keyframes k8{
+                0%{width: 500px;}
+                100%{width: 100px;}
+            }
+            #a8{
+                background-color: red;
+                animation: k8 2s infinite linear;
+            }
+            #a9{
+                background-color: blue;
+                transition: width 1s;
+            }
+            #a9:hover/*鼠標在上觸發*/{
+                width: 100px;
+                transition: width 1s;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="d1"></div>
+        <div id="d2"></div>
+        <div id="d3"></div>
+        <div id="d4"></div>
+        <div id="d5"></div>
+        <div id="d6"></div>
+        <div id="d7"></div>
+        <!--動畫--><hr>
+        <div id="a1"></div>
+        <div id="a2"></div>
+        <div id="a3"></div>
+        <div id="a4"></div>
+        <div id="a5"></div>
+        <div id="a6"></div>
+        <div id="a7"></div>
+        <div id="a8"></div>
+        <div id="a9"></div>
+    </body>
+</html>

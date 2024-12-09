@@ -1,17 +1,113 @@
 <html>
     <head>
-        <title></title>
+        <title>finalgame</title>
         <meta charset="UTF-8">
         <style>
+            #space {
 
+            }
+            #ship {
+                background: url("pic/ship.png");
+                background-size: 40px 60px;
+                width: 40px;
+                height: 60px;
+                position: absolute;
+                left: 380px;
+                top: 720px;
+            }
+            .ufo {
+                background: url("pic/ufo.png");
+                background-size: 60px 40px;
+                width: 60px;
+                height: 40px;
+                position: absolute;
+            }
+            .bullet {
+                width: 4px;
+                height: 6px;
+                background: red;
+                position: absolute;
+            }
         </style>
         <script>
             function get(id) {
                 return document.getElementById(id);
             }
+            function getRandNum(min,max) {
+            return Math.floor(Math.random()*(max-min+1))+min;
+            }
+            function gameInit(){
+                mykeys={"ArrowLeft":0,"ArrowRight":0};
+                ship={pos:380};
+                setInterval(ship_move,1);
+            }
+            function mykeydown(event){
+                event.preventDefault();
+                if(Object.keys(mykeys).includes(event.key)){
+                    mykeys[event.key]=1;
+                } else if(event.key==""){
+                    shoot()
+                }
+            }
+            function mykeyup(event){
+                event.preventDefault();
+                if(Object.keys(mykeys).includes(event.key)){
+                    mykeys[event.key]=0;
+                }
+            }
+            function ship_move(){
+                if(mykeys["ArrowLeft"] && ship.pos>0){
+                    ship.pos--;
+                } else if(mykeys["ArrowRight"] && ship.pos<760){
+                    ship.pos++;
+                }
+                get("ship").style.left=ship.pos+"px";
+            }
+            function shoot(){
+                var b=document.createElement("div");
+                b.className="bullet";
+                b.pos={x:ship.pos+18,y:714};
+                b.style.left=b.pos.x+"px";
+                b.live=setInterval(bullet_move,10,b);
+                get("space").appendChild(b);
+            }
+            function bullet_move(b){
+                if(b.pos.y<=0){
+                    clearInterval(b.live)
+                    b.remove();
+                }else{
+                    b.pos.y--;
+                    b.style.top=b.pos.y+"px";
+                }
+                var ufos=Array.from(document.getElementsByClassName("ufo"))ufos.filter(function(u){
+                    return(u.pos.x<this.x && u.pos.x+60>this+4) && (u.pos.y+40>=this.y);
+                },b.pos);
+            }
+            function ufo_create(){
+                var u=document.createElement("div");
+                u.className="ufo";
+                u.pos={x:getRandNum(10,730),y:-40};
+                u.style.left=u.pos.x+"px";
+                u.style.top=u.pos.y+"px";
+                u.live=setInterval(ufo_move,10,u);
+                get("space").appendChild(u);
+            }
+            function ufo_move(){
+                if(u.pos.y>=800){
+                    clearInterval(u.live);
+                    u.remove();
+                }else{
+                    u.pos.x+=getRandNum(-3,3);
+                    u.pos.y++;
+                    u.style.left=u.pos.x+"px";
+                    u.style.top=u.pos.y+"px";
+                }
+            }
         </script>
     </head>
-    <body>
-        <img src="pic/1.png">
+    <body onload="">
+        <div id="space">
+            <div id="ship"></div>
+        </div>
     </body>
 </html>

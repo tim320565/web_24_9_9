@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <style>
+            #ground{
+                background-image: url("pic/stone\ ground.jpg");
+                background-size: 150px 150px;
+                width:800px;
+                height: 800px;
+                position: relative;
+            }
+            #role{
+                background-image: url("pic/sprite1.png");
+                width: 48px;
+                height: 72px;
+                position: absolute;
+                animation: rolewalk 1s steps(3) infinite;
+            }
+            @keyframes rolewalk{
+                0%{background-position-x: 0px;}
+                100%{background-position-x: -144px;}
+            }
+            .bullet {
+                background-image: url("pic/magic\ ball.jpg")
+            }
+        </style>
+        <script>
+            var pos={x:0,y:0};
+            function get(id) {
+                return document.getElementById(id);
+            }
+                function mykeydown() {
+                event.preventDefault();
+               if(event.key=="ArrowUp") {
+                    get("role").style.backgroundPositionY="-216px";
+                    pos.y-=5;
+               }else if(event.key=="ArrowDown") {
+                    get("role").style.backgroundPositionY="0px";
+                    pos.y+=5
+                }else if(event.key=="ArrowLeft") {
+                    get("role").style.backgroundPositionY="-72px";
+                    pos.x-=5
+                }else if(event.key=="ArrowRight"){
+                    get("role").style.backgroundPositionY="-144px";
+                    pos.x+=5
+                }
+                
+                get("role").style.left=pos.x+"px";
+                get("role").style.top=pos.y+"px";
+            }
+            function shoot(){
+                var b=document.createElement("div");
+                b.className="bullet";
+                b.pos={x:ship.pos+18,y:714};
+                b.style.left=b.pos.x+"px";
+                b.live=setInterval(bullet_move,10,b);
+                get("space").appendChild(b);
+            }
+            function bullet_move(b){
+                if(b.pos.y<=0){
+                    clearInterval(b.live)
+                    b.remove();
+                }else{
+                    b.pos.y--;
+                    b.style.top=b.pos.y+"px";
+                }
+                var ufos=Array.from(document.getElementsByClassName("role")).filter(function(u){
+                    return(u.pos.x<this.x && u.pos.x+60>this+4) && (u.pos.y+40>=this.y);
+                },b.pos);}
+                function mykeydown(event){
+                event.preventDefault();
+                if(Object.keys(mykeys).includes(event.key)){
+                    mykeys[event.key]=1;
+                } else if(event.key==""){
+                    shoot()
+                }
+            }
+        </script>
+    </head>
+    <body onkeydown="mykeydown()">
+        <div id="ground"><div id="role"></div></div>
+    </body>
+</html>

@@ -79,10 +79,10 @@
                     b.pos.y--;
                     b.style.top=b.pos.y+"px";
                 }
-                var ufos=Array.from(document.getElementsByClassName("ufo"))ufos.filter(function(u){
+                var ufos=Array.from(document.getElementsByClassName("ufo"),ufos.filter(function(u){
                     return(u.pos.x<this.x && u.pos.x+60>this+4) && (u.pos.y+40>=this.y);
-                },b.pos);
-            }
+                },b.pos)}
+            
             function ufo_create(){
                 var u=document.createElement("div");
                 u.className="ufo";

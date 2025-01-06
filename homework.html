@@ -5,26 +5,27 @@
         <style>
             #ground{
                 background-image: url("pic/stone\ ground.jpg");
-                background-size: 150px 150px;
-                width:1000px;
-                height: 850px;
+                background-size: 200px 150px;
+                width: 1900px;
+                height: 880px;
                 position: relative;
             }
             #role{
                 background-image: url("pic/sprite1.png");
+                position: absolute;
                 width: 48px;
                 height: 72px;
-                position: absolute;
                 animation: rolewalk 1s steps(3) infinite;
             }
+
             @keyframes rolewalk{
                 0%{background-position-x: 0px;}
                 100%{background-position-x: -144px;}
             }
-            #money1{
-                background-image: url("pic/1\ gold.png");
-                width: 25px;
-                height: 25px;
+            .money1{
+                background-image: url("pic/gold.png");
+                width: 100px;
+                height: 100px;
                 position: absolute;
             }
   
@@ -36,16 +37,16 @@
             }
             function mykeydown() {
                 event.preventDefault();
-               if(event.key=="ArrowUp") {
+               if(event.key=="w") {
                     get("role").style.backgroundPositionY="-216px";
                     pos.y-=5;
-               }else if(event.key=="ArrowDown") {
+               }else if(event.key=="s") {
                     get("role").style.backgroundPositionY="0px";
                     pos.y+=5
-                }else if(event.key=="ArrowLeft") {
+                }else if(event.key=="a") {
                     get("role").style.backgroundPositionY="-72px";
                     pos.x-=5
-                }else if(event.key=="ArrowRight"){
+                }else if(event.key=="d"){
                     get("role").style.backgroundPositionY="-144px";
                     pos.x+=5
                 }
@@ -59,16 +60,15 @@
             function gold(){
                 var u=document.createElement("div");
                 u.className="money1";
-                u.pos={x:getRandNum(1,974),y:getRandNum(1,824)};
+                u.pos={x:getRandNum(5,1895),y:getRandNum(5,875)};
                 u.style.left=u.pos.x+"px";
                 u.style.top=u.pos.y+"px";
-                u.live=setInterval(mykeydown(),1,u);
                 get("ground").appendChild(u);
             }
-          
+
         </script>
     </head>
-    <body onkeydown="mykeydown()">
-            <div id="ground"><div id="role"></div></div>
+    <body onload="gold()" onkeydown="mykeydown()">
+        <div id="ground"><div id="role"></div></div>
     </body>
 </html>

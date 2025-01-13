@@ -24,17 +24,22 @@
             }
             .money1{
                 background-image: url("pic/gold.png");
-                width: 100px;
-                height: 100px;
+                width: 130px;
+                height: 133px;
                 position: absolute;
             }
-  
+            #timebar {
+                width: 800px;
+                height: 20px;
+                background-color: green;
+            }
         </style>
         <script>
             var pos={x:0,y:0};
             function get(id) {
                 return document.getElementById(id);
             }
+ 
             function mykeydown() {
                 event.preventDefault();
                if(event.key=="w") {
@@ -65,10 +70,50 @@
                 u.style.top=u.pos.y+"px";
                 get("ground").appendChild(u);
             }
+            function hitTarget() {
+                if(gameing==false) return
+                x=event.target;
+                gameScore+=x.score;
+                get("score").innerHTML=gameScore;
+                x.remove();
+                if(gameScore>=300){
+                    clearInterval(targetTimer);
+                    targetTimer=setInterval(gold,500);
+                } else if(gameScore>=100){
+                    clearInterval(targetTimer);
+                    targetTimer=setInterval(gold,800);
+            }}
+            function gameStart(){
+                gameing=ture;
+                gameScore=0;
+                tbWidth=800;
+                gameTimer=setInterval(timeCountdown,100);
+                targetTimer=setInterval(gold,1000);
 
+            }
+            function gameStop() {
+                gameing=flase;
+                clearInterval(gameTimer);
+
+            }
+            function timeCountdown (){
+                tbWidth=tbWidth-1;
+                get("timebar").style.width=tbWidth+"px";
+                if(tbWidth<=0){
+                    gameStop();
+                } else if(tbWidth<100){
+                    get("timebar").style.backgroundColor="red";
+                } else if(tbWidth<300){
+                    get("timebar").style.backgroundColor="orange";
+                }
+            }
+            
         </script>
     </head>
-    <body onload="gold()" onkeydown="mykeydown()">
-        <div id="ground"><div id="role"></div></div>
+    <body onload="gold()" onload="gameStart()" onkeydown="mykeydown()">
+        <div id="ground"><div id="role"></div>
+        <div id="timebar"></div>
+        <div>得分:<span id="score">0</span></div>
+        
     </body>
 </html>
